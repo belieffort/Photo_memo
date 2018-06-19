@@ -40,7 +40,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         imagePickerController.allowsEditing = false
         self.present(imagePickerController, animated: true, completion: nil)
-        
     }
     @IBAction func btnImageEdit(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
@@ -66,8 +65,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         appDelegate.saveContext()
         _ = navigationController?.popViewController(animated: true)
         
-        
-        
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -75,7 +72,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             self.image = image
             self.dismiss(animated: true, completion: nil)
             btnImage.isHidden = true
-            
         }
     }
     

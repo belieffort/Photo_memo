@@ -13,6 +13,7 @@ import CoreData
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
+    
     var controller : NSFetchedResultsController<Photomemo>!
     
     var selectedIndexPath: IndexPath?
@@ -33,9 +34,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func fetchPhotomemo()
+    {
+        let fetchRequest : NSFetchRequest<Photomemo> = Photomemo.fetchRequest()
+        let dataSort = NSSortDescriptor(key: "createdAt", ascending: false)
+        fetchRequest.sortDescriptors = [dataSort]
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
+        self.controller = controller
+        
+        do {
+            try controller.performFetch()
+        } catch {
+            let error = error as NSError
+            print("\(error)")
+        }
         
     }
+
     
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,44 +76,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let photomemo = controller.object(at: indexPathForSelectedRow)
         cell.lblTitle.text = photomemo.title
         
+//        print(photomemo.title)
+
+        
         return cell
     }
-    
-    func fetchPhotomemo()
-    {
-        let fetchRequest : NSFetchRequest<Photomemo> = Photomemo.fetchRequest()
-        let dataSort = NSSortDescriptor(key: "createdAt", ascending: false)
-        fetchRequest.sortDescriptors = [dataSort]
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.controller = controller
-        
-        do {
-           try controller.performFetch()
-        } catch {
-            let error = error as NSError
-            print("\(error)")
-            
-        }
-        
-    }
-    
-     // MARK: - Navigation
 
+    
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" {
             let contentViewController: ContentViewController = segue.destination as! ContentViewController
-a
-            
-//            contentViewController.photomemo = photomemo
-            contentViewController.memoTitleLabel.text = photomemo.title
-            contentViewController.memoContentsTextView.text = photomemo.contents
+            let photomemo = controller.object(at: selectedIndexPath!)
+
+                contentViewController.memoTitleLabel.text = photomemo.title
+                contentViewController.memoContentsTextView.text = photomemo.contents
         }
-
     }
-//
-//
-//
-
 }
 
