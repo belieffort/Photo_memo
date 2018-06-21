@@ -63,7 +63,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="YXb-B0-RuF" id="Qib-g8-4N2"/>
                                             <outlet property="lblTitle" destination="p8r-sQ-cDb" id="5NJ-xa-2vD"/>
-                                            <segue destination="o8s-JX-RUY" kind="show" identifier="detail" id="GbM-Qq-29J"/>
+                                            <segue destination="o8s-JX-RUY" kind="show" identifier="ContentViewController" id="qID-mI-6ze"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -90,7 +90,7 @@
         <!--Content View Controller-->
         <scene sceneID="Apn-EG-kMD">
             <objects>
-                <viewController storyboardIdentifier="ContentViewController" id="o8s-JX-RUY" customClass="ContentViewController" customModule="MemoWithCollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o8s-JX-RUY" customClass="ContentViewController" customModule="MemoWithCollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ueY-t1-mFV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,6 +132,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ESp-2B-d20"/>
                     </view>
+                    <navigationItem key="navigationItem" id="1VK-MA-nRv"/>
                     <connections>
                         <outlet property="memoContentsTextView" destination="z48-5t-ASy" id="FnM-ZU-MJC"/>
                         <outlet property="memoImageView" destination="7EM-4g-6Ia" id="DKf-lr-bbR"/>

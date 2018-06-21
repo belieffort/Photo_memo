@@ -13,11 +13,9 @@ import CoreData
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
-    
     var controller : NSFetchedResultsController<Photomemo>!
-    
     var selectedIndexPath: IndexPath?
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +42,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
         self.controller = controller
+        self.controller.delegate = self
         
         do {
             try controller.performFetch()
@@ -51,11 +50,32 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let error = error as NSError
             print("\(error)")
         }
-        
+    }
+    
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        self.collectionView.performBatchUpdates({
+//            self.collectionView.insertItems(at: [selectedIndexPath!])
+//        }, completion: nil)
+//    }
+
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+            case .insert:
+                if let indexPath = newIndexPath {
+                    collectionView.insertItems(at: [indexPath])
+            }
+            break
+            case .delete:
+                if let indexPath = indexPath {
+                    collectionView.deleteItems(at: [indexPath])
+            }
+        default:
+            break
+        }
     }
 
     
-   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let sections = controller.sections {
             let sectionInfo = sections[section]
@@ -63,33 +83,62 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         return 0
     }
+    
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPathForSelectedRow: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPathForSelectedRow) as! CollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         
-//        cell.lblTitle.text = titleMemo[indexPath.item]
-//        cell.imageView.image = imageMemo[indexPath.item]
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
         
-        selectedIndexPath = indexPathForSelectedRow
-        let photomemo = controller.object(at: indexPathForSelectedRow)
+        let photomemo = controller.object(at: indexPath)
         cell.lblTitle.text = photomemo.title
-        
-//        print(photomemo.title)
-
         
         return cell
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPathForSelectedRow: IndexPath) {
+//        selectedIndexPath = indexPathForSelectedRow
+//        print(selectedIndexPath!)
+    
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let contentViewController = mainStoryboard.instantiateViewController(withIdentifier: "ContentViewController") as! ContentViewController
+//
+//        selectedIndexPath = indexPathForSelectedRow
+//        let photomemo = controller.object(at: selectedIndexPath!)
+//        contentViewController.photomemo = photomemo
+//
+//        contentViewController.titleBox = photomemo.title!
+//        contentViewController.contentBox = photomemo.contents!
+//        self.navigationController?.pushViewController(contentViewController, animated: true)
 
+//        print(photomemo)
+        
+//    }
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detail" {
-            let contentViewController: ContentViewController = segue.destination as! ContentViewController
-            let photomemo = controller.object(at: selectedIndexPath!)
-
-                contentViewController.memoTitleLabel.text = photomemo.title
-                contentViewController.memoContentsTextView.text = photomemo.contents
+        
+        //선택한 Cell과 index가 하나씩 어긋난 코드 -> 왜 그런지는 파악해야 함.
+//        if segue.identifier == "ContentViewController" {
+//            let contentViewController: ContentViewController = segue.destination as! ContentViewController
+//            let photomemo = controller.object(at: selectedIndexPath!)
+//
+//            print(photomemo)
+//
+//            contentViewController.photomemo = photomemo
+//            contentViewController.titleBox = photomemo.title!
+//            contentViewController.contentBox = photomemo.contents!
+        
+        if segue.identifier == "ContentViewController" {
+        let contentViewController: ContentViewController = segue.destination as! ContentViewController
+        if let cell = sender as? CollectionViewCell,
+            let indexPath = self.collectionView.indexPath(for: cell){
+            
+            let photomemo = controller.object(at: indexPath)
+            print(photomemo)
+            contentViewController.titleBox = photomemo.title!
+            contentViewController.contentBox = photomemo.contents!
+            }
         }
     }
 }

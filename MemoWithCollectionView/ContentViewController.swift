@@ -15,19 +15,22 @@ class ContentViewController: UIViewController {
     @IBOutlet var memoContentsTextView: UITextView!
     
     var photomemo:Photomemo?
+//
+    var titleBox = ""
+    var contentBox = ""
     
-//    var titleBox = ""
-//    var contentBox = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        memoTitleLabel.text = photomemo?.title
-        memoContentsTextView.text = photomemo?.contents
+//        memoTitleLabel.text = photomemo?.title
+//        memoContentsTextView.text = photomemo?.contents
         
-//        memoTitleLabel.text = titleBox
-//        memoContentsTextView.text = contentBox
+        memoTitleLabel.text = titleBox
+        memoContentsTextView.text = contentBox
         
-
+        
+  
         // Do any additional setup after loading the view.
     }
 

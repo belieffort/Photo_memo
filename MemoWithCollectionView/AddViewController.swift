@@ -44,8 +44,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBAction func btnImageEdit(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        imagePickerController.allowsEditing = false
+        _ = imagePickerController.allowsEditing = false
         self.present(imagePickerController, animated: true, completion: nil)
     }
     @IBAction func btnImageDelete(_ sender: Any) {
