@@ -16,6 +16,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet var text_title: UITextField!
     @IBOutlet var text_contents: UITextView!
     
+    var mainViewController = ViewController()
 
     var image: UIImage?
     
@@ -57,12 +58,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let title = text_title.text
         let contents = text_contents.text
 
-        
-    
-        
         let photomemo = Photomemo(context: context)
        
-//        photomemo.photo = NSData(data: UIImagePNGRepresentation(image!)!)
         photomemo.title = title
         photomemo.contents = contents
         photomemo.createdAt = NSDate()
@@ -74,7 +71,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
-//            self.image = image
+            self.image = image
             self.dismiss(animated: true, completion: nil)
             btnImage.isHidden = true
             return self.createCellItem(with: image)
@@ -82,12 +79,10 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     func createCellItem (with image:UIImage) {
         
-        let photoItem = Photomemo(context: context)
+        let photoItem = Photomemo(context: mainViewController.managedObjectContext)
         photoItem.photo = NSData(data: UIImagePNGRepresentation(image)!)
     }
  
-    
-
     /*
     // MARK: - Navigation
 

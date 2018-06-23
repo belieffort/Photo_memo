@@ -15,15 +15,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet var collectionView: UICollectionView!
     var controller : NSFetchedResultsController<Photomemo>!
     var photos = [Photomemo]()
+    var managedObjectContext: NSManagedObjectContext!
 
   
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        var layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         layout.minimumInteritemSpacing = 2
         layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 150)/2, height: (self.collectionView.frame.size.height - 210)/3)
@@ -47,6 +50,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         do {
             try controller.performFetch()
+            photos = try managedObjectContext.fetch(fetchRequest)
         } catch {
             let error = error as NSError
             print("\(error)")
@@ -91,15 +95,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
         
-        
+        let photomemo = controller.object(at: indexPath)
+        cell.lblTitle.text = photomemo.title
+
         let photoItem = photos[indexPath.item]
-        if let selectedPhoto = UIImage(data: photoItem.photo! as Data){
+        if let selectedPhoto = UIImage(data: photoItem.photo! as Data) {
         cell.imageView.image = selectedPhoto
         }
-        
-        
-        let photomemo = controller.object(at: indexPath)
-            cell.lblTitle.text = photomemo.title
         
         return cell
     }
