@@ -16,9 +16,9 @@
 		72581C5A20C04EE800023E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72581C5920C04EE800023E44 /* Assets.xcassets */; };
 		72581C5D20C04EE800023E44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72581C5B20C04EE800023E44 /* LaunchScreen.storyboard */; };
 		72581C6520C04FE500023E44 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72581C6420C04FE500023E44 /* CollectionViewCell.swift */; };
-		72B1236A20D7AE02001EBC0D /* Photomemo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1236820D7AE02001EBC0D /* Photomemo+CoreDataClass.swift */; };
-		72B1236B20D7AE02001EBC0D /* Photomemo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1236920D7AE02001EBC0D /* Photomemo+CoreDataProperties.swift */; };
 		72BA9CB620C9951A00E3E4E8 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA9CB520C9951A00E3E4E8 /* AddViewController.swift */; };
+		72F5925420DC1589006D9B10 /* Photomemo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5925220DC1589006D9B10 /* Photomemo+CoreDataClass.swift */; };
+		72F5925520DC1589006D9B10 /* Photomemo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5925320DC1589006D9B10 /* Photomemo+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +33,9 @@
 		72581C5C20C04EE800023E44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72581C5E20C04EE800023E44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72581C6420C04FE500023E44 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		72B1236820D7AE02001EBC0D /* Photomemo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photomemo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		72B1236920D7AE02001EBC0D /* Photomemo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photomemo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		72BA9CB520C9951A00E3E4E8 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		72F5925220DC1589006D9B10 /* Photomemo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photomemo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		72F5925320DC1589006D9B10 /* Photomemo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photomemo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +68,8 @@
 		72581C4E20C04EE700023E44 /* MemoWithCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				72B1236820D7AE02001EBC0D /* Photomemo+CoreDataClass.swift */,
-				72B1236920D7AE02001EBC0D /* Photomemo+CoreDataProperties.swift */,
+				72F5925220DC1589006D9B10 /* Photomemo+CoreDataClass.swift */,
+				72F5925320DC1589006D9B10 /* Photomemo+CoreDataProperties.swift */,
 				72581C4F20C04EE700023E44 /* AppDelegate.swift */,
 				720FEF0420CAD0B4007A04F4 /* icons8-add-50.png */,
 				72581C5320C04EE700023E44 /* Main.storyboard */,
@@ -157,13 +157,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72B1236B20D7AE02001EBC0D /* Photomemo+CoreDataProperties.swift in Sources */,
 				72502D0720D434290039E7C1 /* ContentViewController.swift in Sources */,
+				72F5925520DC1589006D9B10 /* Photomemo+CoreDataProperties.swift in Sources */,
 				72BA9CB620C9951A00E3E4E8 /* AddViewController.swift in Sources */,
 				72581C5820C04EE700023E44 /* MemoWithCollectionView.xcdatamodeld in Sources */,
 				72581C5220C04EE700023E44 /* ViewController.swift in Sources */,
+				72F5925420DC1589006D9B10 /* Photomemo+CoreDataClass.swift in Sources */,
 				72581C6520C04FE500023E44 /* CollectionViewCell.swift in Sources */,
-				72B1236A20D7AE02001EBC0D /* Photomemo+CoreDataClass.swift in Sources */,
 				72581C5020C04EE700023E44 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

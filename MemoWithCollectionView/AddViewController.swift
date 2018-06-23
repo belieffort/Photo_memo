@@ -10,12 +10,13 @@
 import UIKit
 
 class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var btnImage: UIButton!
     @IBOutlet var text_title: UITextField!
     @IBOutlet var text_contents: UITextView!
     
+
     var image: UIImage?
     
     override func viewDidLoad() {
@@ -55,9 +56,13 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBAction func btnDone(_ sender: Any) {
         let title = text_title.text
         let contents = text_contents.text
+
+        
+    
         
         let photomemo = Photomemo(context: context)
-        
+       
+//        photomemo.photo = NSData(data: UIImagePNGRepresentation(image!)!)
         photomemo.title = title
         photomemo.contents = contents
         photomemo.createdAt = NSDate()
@@ -65,14 +70,22 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         _ = navigationController?.popViewController(animated: true)
         
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
-            self.image = image
+//            self.image = image
             self.dismiss(animated: true, completion: nil)
             btnImage.isHidden = true
+            return self.createCellItem(with: image)
         }
     }
+    func createCellItem (with image:UIImage) {
+        
+        let photoItem = Photomemo(context: context)
+        photoItem.photo = NSData(data: UIImagePNGRepresentation(image)!)
+    }
+ 
     
 
     /*
@@ -86,3 +99,5 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     */
 
 }
+
+

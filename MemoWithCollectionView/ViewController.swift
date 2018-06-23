@@ -14,7 +14,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet var collectionView: UICollectionView!
     var controller : NSFetchedResultsController<Photomemo>!
-    var selectedIndexPath: IndexPath?
+    var photos = [Photomemo]()
+
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,34 +88,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
-        
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
         
+        
+        let photoItem = photos[indexPath.item]
+        if let selectedPhoto = UIImage(data: photoItem.photo! as Data){
+        cell.imageView.image = selectedPhoto
+        }
+        
+        
         let photomemo = controller.object(at: indexPath)
-        cell.lblTitle.text = photomemo.title
+            cell.lblTitle.text = photomemo.title
         
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPathForSelectedRow: IndexPath) {
-//        selectedIndexPath = indexPathForSelectedRow
-//        print(selectedIndexPath!)
-    
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let contentViewController = mainStoryboard.instantiateViewController(withIdentifier: "ContentViewController") as! ContentViewController
-//
-//        selectedIndexPath = indexPathForSelectedRow
-//        let photomemo = controller.object(at: selectedIndexPath!)
-//        contentViewController.photomemo = photomemo
-//
-//        contentViewController.titleBox = photomemo.title!
-//        contentViewController.contentBox = photomemo.contents!
-//        self.navigationController?.pushViewController(contentViewController, animated: true)
-
-//        print(photomemo)
-        
-//    }
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -142,4 +130,5 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
 }
+
 
