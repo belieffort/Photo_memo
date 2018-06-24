@@ -57,9 +57,12 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBAction func btnDone(_ sender: Any) {
         let title = text_title.text
         let contents = text_contents.text
+        let selectedImage = imageView.image
+        let transferData : Data = UIImagePNGRepresentation(selectedImage!)!
 
         let photomemo = Photomemo(context: context)
        
+        photomemo.photo = transferData as NSData
         photomemo.title = title
         photomemo.contents = contents
         photomemo.createdAt = NSDate()
@@ -74,15 +77,10 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             self.image = image
             self.dismiss(animated: true, completion: nil)
             btnImage.isHidden = true
-            return self.createCellItem(with: image)
+//            let photoItem = Photomemo(context: context)
+//            photoItem.photo = NSData(data: UIImagePNGRepresentation(image)!)
         }
     }
-    func createCellItem (with image:UIImage) {
-        
-        let photoItem = Photomemo(context: mainViewController.managedObjectContext)
-        photoItem.photo = NSData(data: UIImagePNGRepresentation(image)!)
-    }
- 
     /*
     // MARK: - Navigation
 

@@ -15,9 +15,10 @@ class ContentViewController: UIViewController {
     @IBOutlet var memoContentsTextView: UITextView!
     
     var photomemo:Photomemo?
-//
+
     var titleBox = ""
     var contentBox = ""
+    var imageBox : UIImage!
     
     
     override func viewDidLoad() {
@@ -28,7 +29,7 @@ class ContentViewController: UIViewController {
         
         memoTitleLabel.text = titleBox
         memoContentsTextView.text = contentBox
-        
+        memoImageView.image = imageBox
         
   
         // Do any additional setup after loading the view.

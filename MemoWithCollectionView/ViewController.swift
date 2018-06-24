@@ -51,6 +51,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         do {
             try controller.performFetch()
             photos = try managedObjectContext.fetch(fetchRequest)
+            self.collectionView.reloadData()
         } catch {
             let error = error as NSError
             print("\(error)")
@@ -95,14 +96,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
         
+        print(indexPath)
+        
         let photomemo = controller.object(at: indexPath)
         cell.lblTitle.text = photomemo.title
-
+        
         let photoItem = photos[indexPath.item]
         if let selectedPhoto = UIImage(data: photoItem.photo! as Data) {
-        cell.imageView.image = selectedPhoto
+            cell.imageView.image = selectedPhoto
         }
-        
+
         return cell
     }
     
@@ -121,13 +124,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if segue.identifier == "ContentViewController" {
         let contentViewController: ContentViewController = segue.destination as! ContentViewController
-        if let cell = sender as? CollectionViewCell,
-            let indexPath = self.collectionView.indexPath(for: cell){
+        if let cell = sender as? CollectionViewCell, let indexPath = self.collectionView.indexPath(for: cell){
             
             let photomemo = controller.object(at: indexPath)
             print(photomemo)
             contentViewController.titleBox = photomemo.title!
             contentViewController.contentBox = photomemo.contents!
+            
+            let changeData = UIImage(data: photomemo.photo! as Data)
+            
+            contentViewController.imageBox = changeData!
             }
         }
     }
