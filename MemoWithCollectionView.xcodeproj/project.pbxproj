@@ -16,6 +16,7 @@
 		72581C5A20C04EE800023E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72581C5920C04EE800023E44 /* Assets.xcassets */; };
 		72581C5D20C04EE800023E44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72581C5B20C04EE800023E44 /* LaunchScreen.storyboard */; };
 		72581C6520C04FE500023E44 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72581C6420C04FE500023E44 /* CollectionViewCell.swift */; };
+		72BA561D20DFFC2D00FDD2A7 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 72BA561C20DFFC2D00FDD2A7 /* close.png */; };
 		72BA9CB620C9951A00E3E4E8 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA9CB520C9951A00E3E4E8 /* AddViewController.swift */; };
 		72F5925420DC1589006D9B10 /* Photomemo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5925220DC1589006D9B10 /* Photomemo+CoreDataClass.swift */; };
 		72F5925520DC1589006D9B10 /* Photomemo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5925320DC1589006D9B10 /* Photomemo+CoreDataProperties.swift */; };
@@ -33,6 +34,7 @@
 		72581C5C20C04EE800023E44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72581C5E20C04EE800023E44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72581C6420C04FE500023E44 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		72BA561C20DFFC2D00FDD2A7 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		72BA9CB520C9951A00E3E4E8 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		72F5925220DC1589006D9B10 /* Photomemo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photomemo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		72F5925320DC1589006D9B10 /* Photomemo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photomemo+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -74,12 +76,13 @@
 				720FEF0420CAD0B4007A04F4 /* icons8-add-50.png */,
 				72581C5320C04EE700023E44 /* Main.storyboard */,
 				72581C5920C04EE800023E44 /* Assets.xcassets */,
+				72BA561C20DFFC2D00FDD2A7 /* close.png */,
 				72581C5B20C04EE800023E44 /* LaunchScreen.storyboard */,
 				72581C5E20C04EE800023E44 /* Info.plist */,
 				72581C5620C04EE700023E44 /* MemoWithCollectionView.xcdatamodeld */,
 				72581C5120C04EE700023E44 /* ViewController.swift */,
-				72BA9CB520C9951A00E3E4E8 /* AddViewController.swift */,
 				72581C6420C04FE500023E44 /* CollectionViewCell.swift */,
+				72BA9CB520C9951A00E3E4E8 /* AddViewController.swift */,
 				72502D0620D434290039E7C1 /* ContentViewController.swift */,
 			);
 			path = MemoWithCollectionView;
@@ -146,6 +149,7 @@
 				720FEF0520CAD0B4007A04F4 /* icons8-add-50.png in Resources */,
 				72581C5D20C04EE800023E44 /* LaunchScreen.storyboard in Resources */,
 				72581C5A20C04EE800023E44 /* Assets.xcassets in Resources */,
+				72BA561D20DFFC2D00FDD2A7 /* close.png in Resources */,
 				72581C5520C04EE700023E44 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

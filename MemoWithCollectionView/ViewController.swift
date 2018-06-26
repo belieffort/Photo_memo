@@ -16,7 +16,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var controller : NSFetchedResultsController<Photomemo>!
     var photos = [Photomemo]()
     var managedObjectContext: NSManagedObjectContext!
-
+    
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +34,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         fetchPhotomemo()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     func fetchPhotomemo()
     {
         let fetchRequest : NSFetchRequest<Photomemo> = Photomemo.fetchRequest()
@@ -96,16 +92,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
         
-        print(indexPath)
-        
         let photomemo = controller.object(at: indexPath)
         cell.lblTitle.text = photomemo.title
         
-        let photoItem = photos[indexPath.item]
-        if let selectedPhoto = UIImage(data: photoItem.photo! as Data) {
-            cell.imageView.image = selectedPhoto
-        }
-
+        cell.index = indexPath
+        cell.delegate = self
+        
+//  전체 셀에 이미지가 없고 일부 셀에만 이미지 데이터가 있어서 오류가 나타나는 것인가...?
+//        let photoItem = photos[indexPath.item]
+//        if let selectedPhoto = UIImage(data: photoItem.photo! as Data) {
+//            cell.imageView.image = selectedPhoto
+//        }
+      
+        
         return cell
     }
     
@@ -130,12 +129,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             print(photomemo)
             contentViewController.titleBox = photomemo.title!
             contentViewController.contentBox = photomemo.contents!
-            
+
             let changeData = UIImage(data: photomemo.photo! as Data)
-            
             contentViewController.imageBox = changeData!
+            
+      
             }
         }
+    }
+}
+
+extension ViewController : DataCollectionProtocol {
+
+    func deleteData(indx: Int) {
+        photos.remove(at: indx)  //photos의 index와 indx가 맞지 않는 것 같다!!!
+        print(indx)
+        print(photos.count)
+        collectionView.reloadData()
     }
 }
 

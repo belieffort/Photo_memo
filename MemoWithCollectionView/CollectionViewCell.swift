@@ -7,9 +7,28 @@
 //
 
 import UIKit
+import CoreData
+
+
+protocol DataCollectionProtocol {
+    func deleteData(indx: Int)
+}
+
 
 class CollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var lblTitle: UILabel!
+        
+    var delegate : DataCollectionProtocol?
+    var index : IndexPath?
+    
+    
+    @IBAction func btnDelete(_ sender: Any) {
+        delegate?.deleteData(indx: (index?.item)!)
+
+
+    }
     
 }
+
