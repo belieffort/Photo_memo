@@ -10,25 +10,28 @@ import UIKit
 import CoreData
 
 
-protocol DataCollectionProtocol {
-    func deleteData(indx: Int)
-}
-
-
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var lblTitle: UILabel!
-        
-    var delegate : DataCollectionProtocol?
-    var index : IndexPath?
+    @IBOutlet weak var deleteButtonBackgroundView: UIVisualEffectView!
+
+    var photomemo : Photomemo!
     
+    var isEditing: Bool = false {
+        didSet {
+            deleteButtonBackgroundView.isHidden = !isEditing
+            
+        }
+    }
     
     @IBAction func btnDelete(_ sender: Any) {
-        delegate?.deleteData(indx: (index?.item)!)
-
-
+        context.delete(photomemo!)
+        appDelegate.saveContext()
+        
     }
+    
+    
     
 }
 

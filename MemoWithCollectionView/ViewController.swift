@@ -12,10 +12,13 @@ import CoreData
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
     
+    @IBOutlet weak var addBarButtonItem:UIBarButtonItem!
     @IBOutlet var collectionView: UICollectionView!
     var controller : NSFetchedResultsController<Photomemo>!
-    var photos = [Photomemo]()
     var managedObjectContext: NSManagedObjectContext!
+
+    
+//    var selectedIndex : IndexPath?
     
   
     override func viewDidLoad() {
@@ -30,6 +33,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         layout.minimumInteritemSpacing = 2
         layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 150)/2, height: (self.collectionView.frame.size.height - 210)/3)
+        
+        navigationItem.leftBarButtonItem = editButtonItem
         
         fetchPhotomemo()
     }
@@ -46,20 +51,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         do {
             try controller.performFetch()
-            photos = try managedObjectContext.fetch(fetchRequest)
             self.collectionView.reloadData()
         } catch {
             let error = error as NSError
             print("\(error)")
         }
     }
-    
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        self.collectionView.performBatchUpdates({
-//            self.collectionView.insertItems(at: [selectedIndexPath!])
-//        }, completion: nil)
-//    }
-
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
@@ -91,19 +88,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
-        
+
         let photomemo = controller.object(at: indexPath)
         cell.lblTitle.text = photomemo.title
+        cell.photomemo = photomemo
+        if let viewPhoto = UIImage(data: photomemo.photo! as Data) {
+            cell.imageView.image = viewPhoto
+        }
+        cell.deleteButtonBackgroundView.layer.cornerRadius = cell.deleteButtonBackgroundView.bounds.width / 2.0
+        cell.deleteButtonBackgroundView.layer.masksToBounds = true
+        cell.deleteButtonBackgroundView.isHidden = !cell.isEditing
         
-        cell.index = indexPath
-        cell.delegate = self
-        
-//  전체 셀에 이미지가 없고 일부 셀에만 이미지 데이터가 있어서 오류가 나타나는 것인가...?
-//        let photoItem = photos[indexPath.item]
-//        if let selectedPhoto = UIImage(data: photoItem.photo! as Data) {
-//            cell.imageView.image = selectedPhoto
-//        }
-      
         
         return cell
     }
@@ -132,21 +127,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
             let changeData = UIImage(data: photomemo.photo! as Data)
             contentViewController.imageBox = changeData!
-            
-      
+//            contentViewController.photomemo = photomemo
             }
         }
     }
-}
-
-extension ViewController : DataCollectionProtocol {
-
-    func deleteData(indx: Int) {
-        photos.remove(at: indx)  //photos의 index와 indx가 맞지 않는 것 같다!!!
-        print(indx)
-        print(photos.count)
-        collectionView.reloadData()
+    
+    // MARK - Delete Item
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        addBarButtonItem.isEnabled = !editing
+        if let indexPaths = collectionView?.indexPathsForVisibleItems {
+            for indexPath in indexPaths {
+                if let cell = collectionView?.cellForItem(at: indexPath) as? CollectionViewCell {
+                    cell.isEditing = editing
+                }
+            }
+        }
+        
+        
     }
+    
 }
+
 
 

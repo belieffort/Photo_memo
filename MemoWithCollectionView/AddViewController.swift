@@ -16,7 +16,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet var text_title: UITextField!
     @IBOutlet var text_contents: UITextView!
     
-    var mainViewController = ViewController()
+//    var mainViewController = ViewController()
 
     var image: UIImage?
     

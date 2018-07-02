@@ -40,7 +40,12 @@ class ContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func btnDelete(_ sender: Any) {
+//        context.delete(photomemo!)
+//        appDelegate.saveContext()
+//        _ = navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
