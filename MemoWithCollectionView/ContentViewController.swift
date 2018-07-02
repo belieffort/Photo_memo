@@ -24,13 +24,11 @@ class ContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        memoTitleLabel.text = photomemo?.title
-//        memoContentsTextView.text = photomemo?.contents
-        
         memoTitleLabel.text = titleBox
         memoContentsTextView.text = contentBox
         memoImageView.image = imageBox
         
+        self.title = memoTitleLabel.text
   
         // Do any additional setup after loading the view.
     }
@@ -40,11 +38,6 @@ class ContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func btnDelete(_ sender: Any) {
-//        context.delete(photomemo!)
-//        appDelegate.saveContext()
-//        _ = navigationController?.popViewController(animated: true)
-    }
     
     /*
     // MARK: - Navigation
@@ -53,7 +46,8 @@ class ContentViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+
     }
     */
 
-}
+ }

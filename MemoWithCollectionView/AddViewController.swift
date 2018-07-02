@@ -77,8 +77,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             self.image = image
             self.dismiss(animated: true, completion: nil)
             btnImage.isHidden = true
-//            let photoItem = Photomemo(context: context)
-//            photoItem.photo = NSData(data: UIImagePNGRepresentation(image)!)
         }
     }
     /*

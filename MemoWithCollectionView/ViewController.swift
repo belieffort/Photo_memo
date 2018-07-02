@@ -30,7 +30,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.dataSource = self
         
         let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
+        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
+    
         layout.minimumInteritemSpacing = 2
         layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 150)/2, height: (self.collectionView.frame.size.height - 210)/3)
         
@@ -88,6 +89,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
+        cell.lblTitle.layer.borderWidth = 0.5
+        cell.lblTitle.layer.borderColor = UIColor.lightGray.cgColor
 
         let photomemo = controller.object(at: indexPath)
         cell.lblTitle.text = photomemo.title
