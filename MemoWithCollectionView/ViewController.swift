@@ -70,6 +70,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 if let indexPath = indexPath {
                     collectionView.deleteItems(at: [indexPath])
             }
+            break
+            case .update:
+                if let indexPath = indexPath {
+                    collectionView.reloadItems(at: [indexPath])
+            }
+            break
         default:
             break
         }
@@ -124,13 +130,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if let cell = sender as? CollectionViewCell, let indexPath = self.collectionView.indexPath(for: cell){
             
             let photomemo = controller.object(at: indexPath)
-            print(photomemo)
-            contentViewController.titleBox = photomemo.title!
-            contentViewController.contentBox = photomemo.contents!
 
-            let changeData = UIImage(data: photomemo.photo! as Data)
-            contentViewController.imageBox = changeData!
-//            contentViewController.photomemo = photomemo
+//            contentViewController.titleBox = photomemo.title!
+//            contentViewController.contentBox = photomemo.contents!
+//            let changeData = UIImage(data: photomemo.photo! as Data)
+//            contentViewController.imageBox = changeData!
+
+            contentViewController.photomemo = photomemo
             }
         }
     }

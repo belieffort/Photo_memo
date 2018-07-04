@@ -79,6 +79,14 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             btnImage.isHidden = true
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     /*
     // MARK: - Navigation
 
@@ -89,6 +97,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     */
 
+    
 }
 
 

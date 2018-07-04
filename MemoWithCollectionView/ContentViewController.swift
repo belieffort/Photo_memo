@@ -13,20 +13,27 @@ class ContentViewController: UIViewController {
     @IBOutlet var memoImageView: UIImageView!
     @IBOutlet var memoTitleLabel: UILabel!
     @IBOutlet var memoContentsTextView: UITextView!
-    
-    var photomemo:Photomemo?
 
-    var titleBox = ""
-    var contentBox = ""
-    var imageBox : UIImage!
+    var photomemo : Photomemo!
+    var viewcontroller = ViewController()
+
+//    var titleBox = ""
+//    var contentBox = ""
+//    var imageBox : UIImage!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        memoTitleLabel.text = titleBox
-        memoContentsTextView.text = contentBox
-        memoImageView.image = imageBox
+//        memoTitleLabel.text = titleBox
+//        memoContentsTextView.text = contentBox
+//        memoImageView.image = imageBox
+        
+        memoTitleLabel.text = photomemo.title
+        memoContentsTextView.text = photomemo.contents
+        let changeData = UIImage(data: photomemo.photo! as Data)
+        memoImageView.image = changeData
+        
         
         self.title = memoTitleLabel.text
   
@@ -38,16 +45,28 @@ class ContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "Edit" {
+        let editViewController: EditViewController = segue.destination as! EditViewController
+            editViewController.editImage = memoImageView.image
+            editViewController.editTitle = memoTitleLabel.text
+            editViewController.editContent = memoContentsTextView.text
+        
+            photomemo.title = memoTitleLabel.text
+            photomemo.contents = memoContentsTextView.text
+            let selectedImage = memoImageView.image
+            let transferData : Data = UIImagePNGRepresentation(selectedImage!)!
+            photomemo.photo = transferData as NSData
+            
+            editViewController.photomemo = photomemo!
+
+        }
 
     }
-    */
+    
+
 
  }
